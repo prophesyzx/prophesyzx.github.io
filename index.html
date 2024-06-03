@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3.js Project</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h2>青千邀请情况</h2>
+    <div id="chart1" class="container">
+        <svg id="acceptor-ratio"></svg>
+        <p><b>YTT邀请学者学科同意比例图</b></p>
+        <div class="text-explain">如上图所示，获得青千邀请的学者中，一共有412人，其中有339人同意，占比82.33%，73人拒绝。从中可见，大部分学者是愿意参与青千计划，回国进行科研，为国家发展贡献力量
+        </div>
+    </div>
+    <div id="chart2" class="container">
+        <svg id="discipline-rank"></svg>
+        <p><b>YTT邀请学者学科分布图</b></p>
+        <div class="text-explain">
+            如上图所示，青千希望引进的人才主要是工程与材料科学、生命科学、物理与数学、信息科学、化学、环境与地球科学等属自然科学或工程技术领域的研究人员，其中工程与材料科学希望招募的人数最多，环境与地球科学领域的人数最少
+        </div>
+    </div>
+    <h2>同意青千邀请的学者情况</h2>
+    <div id="chart3" class="container">
+        <svg id="pi-0-ratio"></svg>
+        <p><b>未担任海外教职同意YTT比例图</b></p>
+        <svg id="pi-1-ratio"></svg>
+        <p><b>已担任海外教职同意YTT比例图</b></p>
+        <div class="text-explain">
+            如上图所示，在未担任海外教职的学者中，有96.6%的学者同意来国内发展，在担任海外教职的学者中，有62.6%的学者同意来国内发展，可见无论是否担任海外教职，YTTT计划都对他们产生了很大的吸引力，几乎所有未担任海外教职的学者都原理来国内谋求更好的发展，有过半的学者抛弃了海外教职的工作，同意来国内工作。由此可见YTT计划是足够有吸引力的，能够吸引海外人才为今后中国科技、产业的跨越式发展提供支撑
+        </div>
+    </div>
+    <div id="chart4" class="container">
+        <svg id="compare-pub"></svg>
+        <p><b>YTT发文水平统计图</b></p>
+        <div class="text-explain">
+            如上图所示，统计了同意和拒绝YTT计划的学者的发文情款，在平均发文数上，拒绝者比同意者略多，以第一作者发文时，同意者和拒绝者在平均发文量和在top10期刊发文量相差不多，而在以最后作者发文时，拒绝者在平均发文量和在top10期刊发文量上明显比同意者更多。所以，同意YTT计划的学者，他们也都是顶尖研究人员，但相比拒绝者还是要差一线——无论是在担任教职还是发文量上，所以这批学者都是次一线的顶尖人才，有较大的潜力和愿望通过YTT计划更进一步。
+        </div>
+    </div>
+
+    <!-- yxy -->
+    <div class="container">
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="data-type">选择展示数据:</label>
+                <select id="data-type">
+                    <option value="num_of_pub" selected>文章发表数</option>
+                    <option value="top10_num">前10%期刊发表文章数</option>
+                    <option value="fa_pub">首作者发表文章数</option>
+                    <option value="fa_q1pub">前25%期刊首作者发表文章数</option>
+                    <option value="la_pub">通讯作者发表文章数</option>
+                    <option value="la_q1pub">前25%期刊通讯作者发表文章数</option>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label for="discipline-filter">选择学科:</label>
+                <select id="discipline-filter">
+                    <option value="ALL" selected>所有学科</option>
+                    <option value="PHYSICS AND MATHEMATICS">物理数学</option>
+                    <option value="CHEMISTRY">化学</option>
+                    <option value="ENVIRONMENTAL AND EARTH SCIENCE">环境与地球科学</option>
+                    <option value="INFORMATION SCIENCE">信息科学</option>
+                    <option value="LIFE SCIENCE">生命科学</option>
+                    <option value="ENGINEERING AND MATERIALS SCIENCE">工程与材料科学</option>
+                </select>
+
+            </div>
+            <div>
+                <label for="id-search">输入ID查询个人数据：</label>
+                <input type="text" id="id-search" placeholder="输入ID（示例：0_2）">
+                <button id="search-button">查询</button>
+            </div>
+
+            <div class="content-container">
+                <div id="line-graph"></div> <!-- line graph -->
+                <div id="personal-data"></div> <!--personal data -->
+            </div>
+    </div>
+
+    <!-- ldy -->
+    <h2>青千邀请情况</h2>
+    <div id="chart-div" class="container">
+        <svg id="ldy-chart1"></svg>
+        <p><b>YTT邀请学者的团体规模变化</b></p>
+        <div class="text-explain">
+            2010年到2015年期间，青年千人计划邀请的学者teamsize_nlg多于teamsize，尽管2015年的数据较少，但还是可以看出teamsize_nlg多于teamsize。表明对参与学者参与青年千人计划归国后团体规模普遍得到了扩大。
+        </div>
+    </div>
+
+    <h2>青千补助金情况</h2>
+    <div id="chart-div" class="container">
+        <svg id="ldy-chart2"></svg>
+        <p><b>YTT邀请学者经济支持变化</b></p>
+        <div class="text-explain">2014年到2019年期间，青年千人计划邀请的学者获得的经济支持从2015年开始明显高于未参与的学者。</div>
+    </div>
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="js/ldy.js"></script>
+    <script src="js/main.js"></script>
+    <script type="module" src="js/app.js"></script>
+
+</body>
+
+</html>
