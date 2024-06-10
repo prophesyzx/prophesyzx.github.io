@@ -44,10 +44,12 @@ export function drawChart2(data) {
     .style("pointer-events", "none")
     .style("white-space", "nowrap");
     // Bars
-    svg.selectAll("mybar")
+    svg.selectAll(".mybar")
     .data(data)
     .enter()
-    .append("rect").style("opacity", 0.7)
+    .append("rect")
+    .style("opacity", 0.7)
+    .attr("class", "mybar")
     .attr("x", function(d) { return x(d.Discipline); })
     .attr("y", function(d) { return y(d.count); })
     .attr("width", x.bandwidth())
@@ -91,4 +93,19 @@ export function drawChart2(data) {
     .attr("text-anchor", "middle") // 将文本锚定在水平方向的中心
     .style("fill", "white") // 设置文本颜色为白色，以便与柱子对比
     .text(function(d) { return d.count; }); // 设置文本内容为柱子对应的数值
+
+    svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", height + margin.bottom * 0.8)
+    .attr("text-anchor", "middle")
+    .attr("font-weight", "bold")
+    .text("Discipline")
+
+    svg.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("x", - height / 2)
+    .attr("y", - margin.left / 4)
+    .attr("text-anchor", "middle")
+    .attr("font-weight", "bold")
+    .text("People Num")
 }

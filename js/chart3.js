@@ -96,7 +96,7 @@ export function drawChart3_1() {
     .attr("class", "center-text")
     .attr("dy", ".35em")
     .style("text-anchor", "middle")
-    .style("font-size", "30px")
+    .style("font-size", "50px")
     .style("fill", color("acceptor"))
     .text(`${(acceptorRatio * 100).toFixed(1)}%`);
 
@@ -200,7 +200,7 @@ export function drawChart3_2() {
     .attr("class", "center-text")
     .attr("dy", ".35em")
     .style("text-anchor", "middle")
-    .style("font-size", "30px")
+    .style("font-size", "50px")
     .style("fill", color("acceptor"))
     .text(`${(acceptorRatio * 100).toFixed(1)}%`);
     function toUpper(string) {

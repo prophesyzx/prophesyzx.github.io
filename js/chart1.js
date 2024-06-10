@@ -37,10 +37,11 @@ export function drawChart1() {
 
     // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
     svg
-    .selectAll('allSlices')
+    .selectAll('.allSlices')
     .data(data_ready)
     .join('path')
     .attr('d', arc)
+    .attr("class", "allSlices")
     .attr('fill', d => color(d.data[1]))
     .attr("stroke", "white")
     .style("stroke-width", "2px")
@@ -89,9 +90,11 @@ export function drawChart1() {
     .attr("class", "center-text")
     .attr("dy", ".35em")
     .style("text-anchor", "middle")
-    .style("font-size", "30px")
+    .style("font-size", "50px")
     .style("fill", color("acceptor"))
     .text(`${(acceptorRatio * 100).toFixed(1)}%`);
+
+
     function toUpper(string) {
         if (string) {
           return string.charAt(0).toUpperCase() + string.slice(1);
