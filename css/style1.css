@@ -41,7 +41,6 @@ h2 {
     border: 1px solid #ccc;
     border-radius: 4px;
     pointer-events: none;
-    opacity: 0;
 }
 .container p {
     text-align: center;

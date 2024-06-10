@@ -212,7 +212,7 @@ function updateVisualization(outtype, discipline = "ALL", personId = null) {
                 .attr("opacity", group.control === 1 ? 1 : 0.2)
                 .on("mouseover", function(event, d) {
                     d3.select(this).attr("r", 7);
-                    showTooltip(event, `年份: ${d.year_index}<br>${yAxisLabels[outtype]}: ${d.avgOuttype.toFixed(2)}`);
+                    showTooltip(event, `相对年份: ${d.year_index}<br>${yAxisLabels[outtype]}: ${d.avgOuttype.toFixed(2)}`);
                 })
                 .on("mouseout", function(event, d) {
                     d3.select(this).attr("r", 5);
@@ -318,18 +318,20 @@ var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("position", "absolute")
     .style("visibility", "hidden")
-    .style("background", "#f9f9f9")
-    .style("border", "1px solid #d3d3d3")
+    .style("background", "#fff")
+    .style("border", "1px solid #ccc")
     .style("padding", "10px")
-    .style("border-radius", "5px");
+    .style("border-radius", "4px")
+    .style("pointer-events", "none")
+    .style("opacity", 0);
 
 function showTooltip(event, text) {
     tooltip.html(text)
         .style("left", (event.pageX + 10) + "px")
         .style("top", (event.pageY - 20) + "px")
-        .style("visibility", "visible");
+        .style("visibility", "visible")
+        .style("opacity", 1);
 }
-
 function hideTooltip() {
     tooltip.style("visibility", "hidden");
 }
