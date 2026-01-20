@@ -1,0 +1,42 @@
+/* 将标题居中 */
+h1 {
+    text-align: center;
+}
+
+/* Floating index with low-saturation color */
+#floating-index {
+    position: fixed;
+    top: 20%;
+    right: 0;
+    background: #d0d8e0; /* Low-saturation color */
+    color: #004085;
+    padding: 10px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    width: 300px; /* Set a fixed width */
+}
+
+#floating-index ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#floating-index li {
+    margin-bottom: 10px;
+    word-wrap: break-word; /* Ensure long text wraps */
+}
+
+#floating-index a {
+    text-decoration: none;
+    color: #004085;
+    display: block; /* Make links block elements */
+}
+
+#floating-index ul ul {
+    padding-left: 15px; /* Indent nested lists */
+}
+
+#floating-index ul ul li {
+    margin-bottom: 5px;
+}
