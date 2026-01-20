@@ -1,0 +1,13 @@
+{
+  "name": "d3js-project",
+  "version": "1.0.0",
+  "description": "D3.js visualizations project",
+  "main": "index.html",
+  "scripts": {
+    "start": "start index.html"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}
