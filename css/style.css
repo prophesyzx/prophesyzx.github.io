@@ -1,0 +1,9 @@
+a {
+    text-decoration: none; /* 去掉下划线 */
+    color: blue; /* 链接颜色 */
+    font-size: 18px; /* 字体大小 */
+}
+a:hover {
+    text-decoration: underline; /* 鼠标悬停时显示下划线 */
+    color: darkblue; /* 鼠标悬停时改变颜色 */
+}
