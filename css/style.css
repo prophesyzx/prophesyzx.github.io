@@ -426,6 +426,12 @@ a {
     font-size: 0.9rem;
 }
 
+/* 设置按钮样式 */
+.settings-btn {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+
 /* 模态框样式 */
 .modal {
     display: block;
@@ -969,4 +975,5 @@ a {
         gap: 20px;
         text-align: center;
     }
+}
 }
