@@ -94,8 +94,40 @@ const GitHubAPI = {
         }
     },
 
+    // 保存数据到本地文件
+    async saveToLocalFile(data) {
+        // 注意：由于浏览器安全限制，直接写入本地文件需要服务器支持
+        // 这里我们使用localStorage作为本地存储的后备方案
+        localStorage.setItem('articles', JSON.stringify(data));
+        console.log('数据已保存到localStorage');
+        
+        // 如果需要真正的文件写入功能，需要后端API支持
+        // 例如：
+        // const response = await fetch('data/articles.json', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(data)
+        // });
+        // if (!response.ok) throw new Error('保存文件失败');
+    },
+
     // 获取所有文章
     async getAllArticles() {
+        // 优先尝试从本地文件读取
+        try {
+            const response = await fetch(this.config.dataPath);
+            if (response.ok) {
+                const data = await response.json();
+                console.log('从本地文件加载文章:', data);
+                return data;
+            }
+        } catch (error) {
+            console.log('无法从本地文件读取文章，尝试从GitHub获取:', error);
+        }
+        
+        // 如果本地文件不存在或读取失败，尝试从GitHub获取
         try {
             const fileData = await this.getFile(this.config.dataPath);
             return JSON.parse(fileData.content);
@@ -142,7 +174,25 @@ const GitHubAPI = {
         try {
             const articles = await this.getAllArticles();
             articles.unshift(article); // 将新文章添加到开头
-            await this.updateAllArticles(articles, `添加新文章: ${article.title}`);
+            
+            // 尝试保存到本地文件
+            try {
+                await this.saveToLocalFile(articles);
+                console.log('文章已保存到本地文件');
+            } catch (error) {
+                console.log('无法保存到本地文件，尝试保存到GitHub:', error);
+            }
+            
+            // 如果配置了token，尝试保存到GitHub
+            if (this.hasToken()) {
+                try {
+                    await this.updateAllArticles(articles, `添加新文章: ${article.title}`);
+                    console.log('文章已同步到GitHub');
+                } catch (error) {
+                    console.log('无法同步到GitHub，但文章已保存到本地:', error);
+                }
+            }
+            
             return article;
         } catch (error) {
             console.error('添加文章失败:', error);
@@ -158,7 +208,25 @@ const GitHubAPI = {
 
             if (index !== -1) {
                 articles[index] = updatedArticle;
-                await this.updateAllArticles(articles, `更新文章: ${updatedArticle.title}`);
+                
+                // 尝试保存到本地文件
+                try {
+                    await this.saveToLocalFile(articles);
+                    console.log('文章已保存到本地文件');
+                } catch (error) {
+                    console.log('无法保存到本地文件，尝试保存到GitHub:', error);
+                }
+                
+                // 如果配置了token，尝试保存到GitHub
+                if (this.hasToken()) {
+                    try {
+                        await this.updateAllArticles(articles, `更新文章: ${updatedArticle.title}`);
+                        console.log('文章已同步到GitHub');
+                    } catch (error) {
+                        console.log('无法同步到GitHub，但文章已保存到本地:', error);
+                    }
+                }
+                
                 return updatedArticle;
             }
 
@@ -175,7 +243,25 @@ const GitHubAPI = {
             const articles = await this.getAllArticles();
             const article = articles.find(a => a.id === id);
             const filteredArticles = articles.filter(article => article.id !== id);
-            await this.updateAllArticles(filteredArticles, `删除文章: ${article ? article.title : id}`);
+            
+            // 尝试保存到本地文件
+            try {
+                await this.saveToLocalFile(filteredArticles);
+                console.log('文章已保存到本地文件');
+            } catch (error) {
+                console.log('无法保存到本地文件，尝试保存到GitHub:', error);
+            }
+            
+            // 如果配置了token，尝试保存到GitHub
+            if (this.hasToken()) {
+                try {
+                    await this.updateAllArticles(filteredArticles, `删除文章: ${article ? article.title : id}`);
+                    console.log('文章已同步到GitHub');
+                } catch (error) {
+                    console.log('无法同步到GitHub，但文章已保存到本地:', error);
+                }
+            }
+            
             return true;
         } catch (error) {
             console.error('删除文章失败:', error);
@@ -191,7 +277,25 @@ const GitHubAPI = {
 
             if (article) {
                 article.isPinned = !article.isPinned;
-                await this.updateAllArticles(articles, `${article.isPinned ? '置顶' : '取消置顶'}文章: ${article.title}`);
+                
+                // 尝试保存到本地文件
+                try {
+                    await this.saveToLocalFile(articles);
+                    console.log('文章已保存到本地文件');
+                } catch (error) {
+                    console.log('无法保存到本地文件，尝试保存到GitHub:', error);
+                }
+                
+                // 如果配置了token，尝试保存到GitHub
+                if (this.hasToken()) {
+                    try {
+                        await this.updateAllArticles(articles, `${article.isPinned ? '置顶' : '取消置顶'}文章: ${article.title}`);
+                        console.log('文章已同步到GitHub');
+                    } catch (error) {
+                        console.log('无法同步到GitHub，但文章已保存到本地:', error);
+                    }
+                }
+                
                 return article;
             }
 

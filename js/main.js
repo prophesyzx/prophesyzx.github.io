@@ -82,7 +82,7 @@ window.addEventListener('load', function() {
 // 创建文章按钮事件
 if (document.getElementById('create-article-btn')) {
     document.getElementById('create-article-btn').addEventListener('click', function() {
-        ArticleManager.showCreateArticleModal();
+        window.open('edit-article.html', '_blank');
     });
 }
 
@@ -103,4 +103,11 @@ if (document.getElementById('settings-btn')) {
 // 页面加载时渲染文章
 window.addEventListener('load', function() {
     ArticleManager.renderArticles();
+});
+
+// 监听来自编辑页面的消息
+window.addEventListener('message', function(event) {
+    if (event.data && event.data.action === 'refreshArticles') {
+        ArticleManager.renderArticles();
+    }
 });

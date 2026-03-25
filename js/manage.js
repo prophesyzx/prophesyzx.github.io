@@ -17,6 +17,13 @@ const ManageArticles = {
     init() {
         this.bindEvents();
         this.renderArticles();
+        
+        // 监听来自编辑页面的消息
+        window.addEventListener('message', (event) => {
+            if (event.data && event.data.action === 'refreshArticles') {
+                this.renderArticles();
+            }
+        });
     },
     
     // 绑定事件
@@ -51,16 +58,13 @@ const ManageArticles = {
         
         // 创建文章按钮事件
         document.getElementById('create-article-btn').addEventListener('click', () => {
-            window.location.href = 'index.html';
-            setTimeout(() => {
-                ArticleManager.showCreateArticleModal();
-            }, 500);
+            window.open('edit-article.html', '_blank');
         });
     },
     
     // 获取筛选后的文章
-    getFilteredArticles() {
-        let articles = ArticleManager.getAllArticles();
+    async getFilteredArticles() {
+        let articles = await ArticleManager.getAllArticles();
         
         // 搜索过滤
         if (this.filters.search) {
@@ -96,8 +100,8 @@ const ManageArticles = {
     },
     
     // 渲染文章列表
-    renderArticles() {
-        const articles = this.getFilteredArticles();
+    async renderArticles() {
+        const articles = await this.getFilteredArticles();
         const tableBody = document.getElementById('articles-table-body');
         
         if (!tableBody) return;
@@ -185,18 +189,15 @@ const ManageArticles = {
         document.querySelectorAll('.btn-edit').forEach(btn => {
             btn.addEventListener('click', () => {
                 const articleId = btn.dataset.id;
-                window.location.href = `article.html?id=${articleId}`;
-                setTimeout(() => {
-                    ArticleManager.showEditArticleModal(articleId);
-                }, 500);
+                window.open(`edit-article.html?id=${articleId}`, '_blank');
             });
         });
         
         // 置顶按钮
         document.querySelectorAll('.btn-pin').forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', async () => {
                 const articleId = btn.dataset.id;
-                ArticleManager.togglePinArticle(articleId);
+                await ArticleManager.togglePinArticle(articleId);
                 this.renderArticles();
             });
         });

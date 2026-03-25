@@ -95,9 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 500);
         
         // 添加操作按钮
-        const articleContainer = document.querySelector('.article-container');
-        if (articleContainer) {
-            const buttonContainer = document.createElement('div');
+        const buttonContainer = document.createElement('div');
             buttonContainer.className = 'article-actions';
             
             // 编辑按钮
@@ -122,18 +120,19 @@ document.addEventListener('DOMContentLoaded', function() {
             // 置顶按钮
             const pinButton = document.createElement('button');
             pinButton.className = 'btn btn-pin-article';
-            const article = ArticleManager.getArticleById(articleId);
-            pinButton.textContent = article.isPinned ? '取消置顶' : '置顶文章';
-            pinButton.addEventListener('click', function() {
-                ArticleManager.togglePinArticle(articleId);
-                pinButton.textContent = ArticleManager.getArticleById(articleId).isPinned ? '取消置顶' : '置顶文章';
+            ArticleManager.getArticleById(articleId).then(article => {
+                pinButton.textContent = article.isPinned ? '取消置顶' : '置顶文章';
+            });
+            pinButton.addEventListener('click', async function() {
+                await ArticleManager.togglePinArticle(articleId);
+                const updatedArticle = await ArticleManager.getArticleById(articleId);
+                pinButton.textContent = updatedArticle.isPinned ? '取消置顶' : '置顶文章';
             });
             
             buttonContainer.appendChild(editButton);
             buttonContainer.appendChild(deleteButton);
             buttonContainer.appendChild(pinButton);
-            articleContainer.appendChild(buttonContainer);
-        }
+            document.body.appendChild(buttonContainer);
     } else {
         // 如果没有提供文章ID，重定向到首页
         window.location.href = 'index.html';

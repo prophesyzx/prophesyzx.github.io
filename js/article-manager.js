@@ -2,9 +2,23 @@
 const ArticleManager = {
     // 初始化文章数据
     async init() {
-        try {
-            // 尝试从GitHub获取文章数据
-            const articles = await GitHubAPI.getAllArticles();
+        // 优先从localStorage获取文章数据
+        const localArticles = localStorage.getItem('articles');
+        if (localArticles) {
+            try {
+                const articles = JSON.parse(localArticles);
+                console.log('从localStorage加载文章:', articles);
+                return articles;
+            } catch (error) {
+                console.error('解析本地文章数据失败:', error);
+            }
+        }
+        
+        // 如果localStorage中没有数据，尝试从GitHub获取
+        if (GitHubAPI.hasToken()) {
+            try {
+                const articles = await GitHubAPI.getAllArticles();
+                console.log('从GitHub加载文章:', articles);
             
             // 如果GitHub中没有文章数据，初始化一些示例文章
             if (articles.length === 0) {
@@ -335,40 +349,61 @@ plt.show()
                 localStorage.setItem('articles', JSON.stringify(initialArticles));
                 return initialArticles;
             }
-            return JSON.parse(localStorage.getItem('articles')) || [];
-        }
-    },
+            // 如果localStorage和GitHub都没有数据，初始化一些示例文章
+            if (!localStorage.getItem('articles')) {
+                const initialArticles = [
     
     // 获取所有文章
     async getAllArticles() {
-        try {
-            // 尝试从GitHub获取文章数据
-            return await GitHubAPI.getAllArticles();
-        } catch (error) {
-            console.error('获取文章失败:', error);
-            // 如果GitHub API调用失败，使用localStorage作为后备
-            return JSON.parse(localStorage.getItem('articles')) || [];
+        // 优先从localStorage获取文章数据
+        const localArticles = localStorage.getItem('articles');
+        if (localArticles) {
+            try {
+                return JSON.parse(localArticles);
+            } catch (error) {
+                console.error('解析本地文章数据失败:', error);
+            }
         }
+        
+        // 如果localStorage中没有数据，尝试从GitHub获取
+        if (GitHubAPI.hasToken()) {
+            try {
+                return await GitHubAPI.getAllArticles();
+            } catch (error) {
+                console.error('从GitHub获取文章失败:', error);
+            }
+        }
+        
+        // 如果都没有数据，返回空数组
+        return [];
     },
     
     // 根据ID获取文章
-    getArticleById(id) {
-        const articles = this.getAllArticles();
+    async getArticleById(id) {
+        const articles = await this.getAllArticles();
         return articles.find(article => article.id === id);
     },
     
     // 添加文章
     async addArticle(article) {
-        try {
-            return await GitHubAPI.addArticle(article);
-        } catch (error) {
-            console.error('添加文章失败:', error);
-            // 如果GitHub API调用失败，使用localStorage作为后备
-            const articles = await this.getAllArticles();
-            articles.unshift(article); // 将新文章添加到开头
-            localStorage.setItem('articles', JSON.stringify(articles));
-            return article;
+        console.log('添加文章到localStorage:', article);
+        // 直接保存到localStorage
+        const articles = await this.getAllArticles();
+        console.log('当前文章列表:', articles);
+        articles.unshift(article); // 将新文章添加到开头
+        localStorage.setItem('articles', JSON.stringify(articles));
+        console.log('文章已保存到localStorage');
+        
+        // 尝试同步到GitHub（如果配置了token）
+        if (GitHubAPI.hasToken()) {
+            try {
+                await GitHubAPI.addArticle(article);
+            } catch (error) {
+                console.error('同步文章到GitHub失败:', error);
+            }
         }
+        
+        return article;
     },
     
     // 显示创建文章模态框
@@ -569,8 +604,9 @@ plt.show()
     },
     
     // 更新文章
-    updateArticle(updatedArticle) {
-        const articles = this.getAllArticles();
+    async updateArticle(updatedArticle) {
+        console.log('更新文章:', updatedArticle);
+        const articles = await this.getAllArticles();
         const index = articles.findIndex(article => article.id === updatedArticle.id);
         
         if (index !== -1) {
@@ -590,8 +626,8 @@ plt.show()
     },
     
     // 切换文章置顶状态
-    togglePinArticle(id) {
-        const articles = this.getAllArticles();
+    async togglePinArticle(id) {
+        const articles = await this.getAllArticles();
         const article = articles.find(article => article.id === id);
         
         if (article) {
