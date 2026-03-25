@@ -93,6 +93,13 @@ if (document.getElementById('manage-articles-btn')) {
     });
 }
 
+// 设置按钮点击事件
+if (document.getElementById('settings-btn')) {
+    document.getElementById('settings-btn').addEventListener('click', function() {
+        window.location.href = 'settings.html';
+    });
+}
+
 // 页面加载时渲染文章
 window.addEventListener('load', function() {
     ArticleManager.renderArticles();

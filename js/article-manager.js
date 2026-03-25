@@ -358,11 +358,17 @@ plt.show()
     },
     
     // 添加文章
-    addArticle(article) {
-        const articles = this.getAllArticles();
-        articles.unshift(article); // 将新文章添加到开头
-        localStorage.setItem('articles', JSON.stringify(articles));
-        return article;
+    async addArticle(article) {
+        try {
+            return await GitHubAPI.addArticle(article);
+        } catch (error) {
+            console.error('添加文章失败:', error);
+            // 如果GitHub API调用失败，使用localStorage作为后备
+            const articles = await this.getAllArticles();
+            articles.unshift(article); // 将新文章添加到开头
+            localStorage.setItem('articles', JSON.stringify(articles));
+            return article;
+        }
     },
     
     // 显示创建文章模态框
