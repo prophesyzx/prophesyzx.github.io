@@ -88,20 +88,24 @@ const ArticleManager = {
             const articles = await this.getAllArticles();
             articles.unshift(article); // 将新文章添加到开头
             
-            // 保存到localStorage
+            // 立即保存到localStorage，以便快速显示
             localStorage.setItem('articles', JSON.stringify(articles));
             console.log('文章已保存到localStorage');
             
-            // 如果配置了token，尝试同步到GitHub
+            // 立即渲染文章列表，以便快速显示
+            this.renderArticles();
+            
+            // 异步同步到GitHub，不阻塞UI
             if (GitHubAPI.hasToken()) {
-                try {
-                    await GitHubAPI.addArticle(article);
-                    console.log('文章已同步到GitHub');
-                    alert('文章已成功保存到GitHub！');
-                } catch (error) {
-                    console.log('无法同步到GitHub，但文章已保存到本地:', error);
-                    alert('文章已保存到本地，但无法同步到GitHub。请检查您的GitHub Token配置。');
-                }
+                GitHubAPI.addArticle(article)
+                    .then(() => {
+                        console.log('文章已同步到GitHub');
+                        alert('文章已成功保存到GitHub！');
+                    })
+                    .catch(error => {
+                        console.log('无法同步到GitHub，但文章已保存到本地:', error);
+                        alert('文章已保存到本地，但无法同步到GitHub。请检查您的GitHub Token配置。');
+                    });
             } else {
                 alert('文章已保存到本地。要同步到GitHub，请在设置中配置GitHub Token。');
             }
@@ -124,20 +128,24 @@ const ArticleManager = {
             if (index !== -1) {
                 articles[index] = updatedArticle;
                 
-                // 保存到localStorage
+                // 立即保存到localStorage，以便快速显示
                 localStorage.setItem('articles', JSON.stringify(articles));
                 console.log('文章已保存到localStorage');
                 
-                // 如果配置了token，尝试同步到GitHub
+                // 立即渲染文章列表，以便快速显示
+                this.renderArticles();
+                
+                // 异步同步到GitHub，不阻塞UI
                 if (GitHubAPI.hasToken()) {
-                    try {
-                        await GitHubAPI.updateArticle(updatedArticle);
-                        console.log('文章已同步到GitHub');
-                        alert('文章已成功保存到GitHub！');
-                    } catch (error) {
-                        console.log('无法同步到GitHub，但文章已保存到本地:', error);
-                        alert('文章已保存到本地，但无法同步到GitHub。请检查您的GitHub Token配置。');
-                    }
+                    GitHubAPI.updateArticle(updatedArticle)
+                        .then(() => {
+                            console.log('文章已同步到GitHub');
+                            alert('文章已成功保存到GitHub！');
+                        })
+                        .catch(error => {
+                            console.log('无法同步到GitHub，但文章已保存到本地:', error);
+                            alert('文章已保存到本地，但无法同步到GitHub。请检查您的GitHub Token配置。');
+                        });
                 } else {
                     alert('文章已保存到本地。要同步到GitHub，请在设置中配置GitHub Token。');
                 }
@@ -162,20 +170,24 @@ const ArticleManager = {
             if (index !== -1) {
                 articles.splice(index, 1);
                 
-                // 保存到localStorage
+                // 立即保存到localStorage，以便快速显示
                 localStorage.setItem('articles', JSON.stringify(articles));
                 console.log('文章已保存到localStorage');
                 
-                // 如果配置了token，尝试同步到GitHub
+                // 立即渲染文章列表，以便快速显示
+                this.renderArticles();
+                
+                // 异步同步到GitHub，不阻塞UI
                 if (GitHubAPI.hasToken()) {
-                    try {
-                        await GitHubAPI.deleteArticle(id);
-                        console.log('文章已同步到GitHub');
-                        alert('文章已成功从GitHub删除！');
-                    } catch (error) {
-                        console.log('无法同步到GitHub，但文章已保存到本地:', error);
-                        alert('文章已从本地删除，但无法从GitHub删除。请检查您的GitHub Token配置。');
-                    }
+                    GitHubAPI.deleteArticle(id)
+                        .then(() => {
+                            console.log('文章已同步到GitHub');
+                            alert('文章已成功从GitHub删除！');
+                        })
+                        .catch(error => {
+                            console.log('无法同步到GitHub，但文章已保存到本地:', error);
+                            alert('文章已从本地删除，但无法从GitHub删除。请检查您的GitHub Token配置。');
+                        });
                 } else {
                     alert('文章已从本地删除。要从GitHub删除，请在设置中配置GitHub Token。');
                 }
@@ -200,20 +212,24 @@ const ArticleManager = {
             if (article) {
                 article.isPinned = !article.isPinned;
                 
-                // 保存到localStorage
+                // 立即保存到localStorage，以便快速显示
                 localStorage.setItem('articles', JSON.stringify(articles));
                 console.log('文章已保存到localStorage');
                 
-                // 如果配置了token，尝试同步到GitHub
+                // 立即渲染文章列表，以便快速显示
+                this.renderArticles();
+                
+                // 异步同步到GitHub，不阻塞UI
                 if (GitHubAPI.hasToken()) {
-                    try {
-                        await GitHubAPI.togglePinArticle(id);
-                        console.log('文章已同步到GitHub');
-                        alert('文章置顶状态已成功保存到GitHub！');
-                    } catch (error) {
-                        console.log('无法同步到GitHub，但文章已保存到本地:', error);
-                        alert('文章置顶状态已保存到本地，但无法同步到GitHub。请检查您的GitHub Token配置。');
-                    }
+                    GitHubAPI.togglePinArticle(id)
+                        .then(() => {
+                            console.log('文章已同步到GitHub');
+                            alert('文章置顶状态已成功保存到GitHub！');
+                        })
+                        .catch(error => {
+                            console.log('无法同步到GitHub，但文章已保存到本地:', error);
+                            alert('文章置顶状态已保存到本地，但无法同步到GitHub。请检查您的GitHub Token配置。');
+                        });
                 } else {
                     alert('文章置顶状态已保存到本地。要同步到GitHub，请在设置中配置GitHub Token。');
                 }
@@ -244,8 +260,18 @@ const ArticleManager = {
             return;
         }
 
+        // 先按置顶状态排序，然后按创建时间排序（最新的在前）
+        const sortedArticles = [...articles].sort((a, b) => {
+            // 如果一个置顶，一个不置顶，置顶的在前
+            if (a.isPinned && !b.isPinned) return -1;
+            if (!a.isPinned && b.isPinned) return 1;
+            
+            // 如果都置顶或都不置顶，按创建时间排序（最新的在前）
+            return new Date(b.date) - new Date(a.date);
+        });
+
         // 渲染文章卡片
-        articles.forEach(article => {
+        sortedArticles.forEach(article => {
             const articleCard = this.createArticleCard(article);
             articlesContainer.appendChild(articleCard);
         });
