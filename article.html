@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>文章详情 - Prophesyzx's Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/article.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Prophesyzx's <span class="highlight">Blog</span></h1>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="index.html#about" class="nav-link">关于我</a>
+                <a href="index.html#posts" class="nav-link">文章</a>
+                <a href="index.html#projects" class="nav-link">项目</a>
+                <a href="index.html#contact" class="nav-link">联系</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="article-container">
+                <div class="loading">加载中...</div>
+            </div>
+            <div class="article-navigation">
+                <a href="index.html#posts" class="btn btn-secondary">返回文章列表</a>
+            </div>
+        </div>
+        
+        <!-- 滚动到顶部和底部按钮 -->
+        <div class="scroll-buttons">
+            <button id="scroll-to-top" class="scroll-button" title="滚动到顶部">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            <button id="scroll-to-bottom" class="scroll-button" title="滚动到底部">
+                <i class="fas fa-arrow-down"></i>
+            </button>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2023 Prophesyzx's Blog. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-weibo"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/article-manager.js"></script>
+    <script src="js/markdown-editor.js"></script>
+    <script src="js/article.js"></script>
+</body>
+</html>

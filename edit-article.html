@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑文章 - Prophesyzx's Blog</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/edit-article.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Prophesyzx's <span class="highlight">Blog</span></h1>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">返回首页</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="edit-article-container">
+                <h2>编辑文章</h2>
+                <form id="edit-article-form">
+                    <div class="form-group">
+                        <label for="edit-article-title">标题</label>
+                        <input type="text" id="edit-article-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-article-category">分类</label>
+                        <select id="edit-article-category" required>
+                            <option value="数据分析">数据分析</option>
+                            <option value="编程技巧">编程技巧</option>
+                            <option value="Web开发">Web开发</option>
+                            <option value="技术分享">技术分享</option>
+                            <option value="学习笔记">学习笔记</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-article-excerpt">摘要</label>
+                        <textarea id="edit-article-excerpt" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>文章内容 (Markdown格式)</label>
+                        <div id="edit-markdown-editor-container"></div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" id="cancel-edit-article-btn" class="btn btn-secondary">取消</button>
+                        <button type="submit" class="btn btn-primary">保存修改</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/article-manager.js"></script>
+    <script src="js/markdown-editor.js"></script>
+    <script src="js/edit-article.js"></script>
+</body>
+</html>

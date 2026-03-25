@@ -1,14 +1,196 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Home</title>
+    <title>Prophesyzx's Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <h1>Welcome to the Home Page</h1>
-    <a href="web1/index.html">数据可视化-小组作业</a><br>
-    <a href="web2/数据分析报告.html">Python数据分析汇报-Jupyter版</a>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Prophesyzx's <span class="highlight">Blog</span></h1>
+            <nav class="nav">
+                <a href="#home" class="nav-link active">首页</a>
+                <a href="#about" class="nav-link">关于我</a>
+                <a href="#posts" class="nav-link">文章</a>
+                <a href="#projects" class="nav-link">项目</a>
+                <a href="#contact" class="nav-link">联系</a>
+            </nav>
+            <div class="article-buttons">
+                <button id="create-article-btn" class="btn btn-primary create-article-btn">创建文章</button>
+                <button id="manage-articles-btn" class="btn btn-primary manage-articles-btn">管理文章</button>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>欢迎来到我的个人博客</h1>
+                <p>分享技术、记录生活、探索未知</p>
+                <div class="hero-buttons">
+                    <a href="#posts" class="btn btn-primary">浏览文章</a>
+                    <a href="#about" class="btn btn-secondary">了解更多</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">关于我</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>你好！我是Zx，一名热爱技术和学习的开发者。这个博客是我分享知识、记录成长的地方。</p>
+                    <p>我专注于数据可视化、Python编程和Web开发。通过这个博客，我希望能够分享我的学习心得和项目经验，与更多志同道合的朋友交流。</p>
+                    <div class="skills">
+                        <h3>技能</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">数据分析</span>
+                            <span class="skill-tag">数据可视化</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Git</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="posts" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">最新文章</h2>
+            <div class="posts-grid">
+                <article class="post-card">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="post-date">2023-10-15</span>
+                            <span class="post-category">数据分析</span>
+                        </div>
+                        <h3 class="post-title">数据可视化在学术研究中的应用</h3>
+                        <p class="post-excerpt">探讨如何利用数据可视化技术更好地展示研究成果，提高论文的可读性和影响力。</p>
+                        <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="post-date">2023-10-10</span>
+                            <span class="post-category">编程技巧</span>
+                        </div>
+                        <h3 class="post-title">Python数据分析常用技巧总结</h3>
+                        <p class="post-excerpt">分享在Python数据分析过程中常用的技巧和工具，帮助你提高数据分析效率。</p>
+                        <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="post-date">2023-10-05</span>
+                            <span class="post-category">Web开发</span>
+                        </div>
+                        <h3 class="post-title">构建响应式网站的实用指南</h3>
+                        <p class="post-excerpt">学习如何创建一个在各种设备上都能良好显示的响应式网站，提升用户体验。</p>
+                        <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">项目展示</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="project-title">数据可视化-小组作业</h3>
+                    <p class="project-description">基于Web的数据可视化项目，展示小组数据分析成果</p>
+                    <a href="web1/index.html" class="project-link">查看项目 <i class="fas fa-external-link-alt"></i></a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-file-code"></i>
+                    </div>
+                    <h3 class="project-title">Python数据分析汇报</h3>
+                    <p class="project-description">使用Python和Jupyter Notebook完成的数据分析报告</p>
+                    <a href="web2/数据分析报告.html" class="project-link">查看项目 <i class="fas fa-external-link-alt"></i></a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="project-title">个人博客系统</h3>
+                    <p class="project-description">基于GitHub Pages的个人博客系统，方便随时查看和编辑</p>
+                    <a href="#" class="project-link">查看项目 <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">联系我</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>your.email@example.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <span>github.com/prophesyzx</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-weixin"></i>
+                        <span>你的微信号</span>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="您的姓名" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="您的邮箱" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="您的留言" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">发送留言</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2023 Prophesyzx's Blog. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-weibo"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/article-manager.js"></script>
+    <script src="js/markdown-editor.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,102 @@
+/* 编辑文章页面样式 */
+.main .container {
+    max-width: 100%;
+    padding: 0;
+}
+
+.edit-article-container {
+    width: 100%;
+    margin: 20px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-article-container h2 {
+    margin-bottom: 30px;
+    color: var(--primary-color);
+}
+
+.edit-article-container .form-group {
+    margin-bottom: 20px;
+}
+
+.edit-article-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.edit-article-container input[type="text"],
+.edit-article-container select,
+.edit-article-container textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.edit-article-container input[type="text"]:focus,
+.edit-article-container select:focus,
+.edit-article-container textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.edit-article-container #edit-markdown-editor-container {
+    min-height: 550px;
+    border: none;
+    border-radius: 0;
+}
+
+.edit-article-container .editor-container {
+    height: 550px;
+}
+
+.edit-article-container .editor-pane {
+    height: 100%;
+    overflow: hidden;
+}
+
+.edit-article-container .editor-textarea {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.edit-article-container .markdown-textarea {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.edit-article-container .markdown-preview {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.edit-article-container .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .edit-article-container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .edit-article-container .form-actions {
+        flex-direction: column;
+    }
+
+    .edit-article-container .form-actions button {
+        width: 100%;
+    }
+}

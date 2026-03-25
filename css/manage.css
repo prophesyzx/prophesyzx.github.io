@@ -1,0 +1,231 @@
+/* 文章管理页面样式 */
+.main {
+    padding: 40px 0;
+    min-height: calc(100vh - 200px);
+}
+
+/* 导航按钮容器样式 */
+.nav-buttons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.manage-header {
+    margin-bottom: 30px;
+}
+
+.manage-header h2 {
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+}
+
+.manage-controls {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    background-color: white;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 15px 10px 40px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+}
+
+.filter-box,
+.sort-box {
+    min-width: 150px;
+}
+
+.filter-box select,
+.sort-box select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    background-color: white;
+}
+
+.articles-table-container {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.articles-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.articles-table thead {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.articles-table th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 500;
+}
+
+.checkbox-column {
+    width: 40px;
+    text-align: center;
+}
+
+.checkbox-column input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.title-column {
+    width: 40%;
+}
+
+.date-column {
+    width: 15%;
+}
+
+.category-column {
+    width: 15%;
+}
+
+.status-column {
+    width: 15%;
+}
+
+.actions-column {
+    width: 15%;
+    text-align: center;
+}
+
+.articles-table tbody tr {
+    border-bottom: 1px solid #eee;
+    transition: var(--transition);
+}
+
+.articles-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.articles-table td {
+    padding: 12px 15px;
+}
+
+.article-status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.article-status.published {
+    background-color: #e8f5e9;
+    color: #155724;
+}
+
+.article-status.draft {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.article-status.pinned {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.article-actions {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+
+.article-actions button {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: white;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.article-actions button:hover {
+    background-color: #f0f0f0;
+}
+
+.article-actions .btn-edit {
+    color: #0c5460;
+}
+
+.article-actions .btn-delete {
+    color: #dc3545;
+}
+
+.article-actions .btn-delete:hover {
+    background-color: #f0f0f0;
+}
+
+.article-actions .btn-pin {
+    color: #ffc107;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 0;
+    color: #777;
+}
+
+.empty-state i {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .manage-controls {
+        flex-direction: column;
+    }
+    
+    .search-box,
+    .filter-box,
+    .sort-box {
+        min-width: 100%;
+    }
+    
+    .articles-table-container {
+        overflow-x: auto;
+    }
+    
+    .title-column {
+        width: 30%;
+    }
+    
+    .date-column,
+    .category-column,
+    .status-column,
+    .actions-column {
+        width: 17.5%;
+    }
+}

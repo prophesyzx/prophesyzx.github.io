@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章管理 - Prophesyzx's Blog</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/manage.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Prophesyzx's <span class="highlight">Blog</span></h1>
+            <nav class="nav">
+                <div class="nav-buttons">
+                    <a href="index.html" class="nav-link">返回首页</a>
+                    <button id="create-article-btn" class="btn btn-primary create-article-btn">创建文章</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="manage-header">
+                <h2>文章管理</h2>
+                <div class="manage-controls">
+                    <div class="search-box">
+                        <input type="text" id="search-input" placeholder="搜索文章...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="filter-box">
+                        <select id="filter-category">
+                            <option value="">全部分类</option>
+                            <option value="数据分析">数据分析</option>
+                            <option value="编程技巧">编程技巧</option>
+                            <option value="Web开发">Web开发</option>
+                            <option value="技术分享">技术分享</option>
+                            <option value="学习笔记">学习笔记</option>
+                        </select>
+                    </div>
+                    <div class="sort-box">
+                        <select id="sort-by">
+                            <option value="date-desc">日期（最新）</option>
+                            <option value="date-asc">日期（最早）</option>
+                            <option value="title-asc">标题（A-Z）</option>
+                            <option value="title-desc">标题（Z-A）</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="articles-table-container">
+                <table class="articles-table">
+                    <thead>
+                        <tr>
+                            <th class="checkbox-column"><input type="checkbox" id="select-all"></th>
+                            <th class="title-column">标题</th>
+                            <th class="date-column">日期</th>
+                            <th class="category-column">分类</th>
+                            <th class="status-column">状态</th>
+                            <th class="actions-column">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="articles-table-body">
+                        <!-- 文章列表将通过JavaScript动态加载 -->
+                    </tbody>
+                </table>
+            </div>
+
+            
+            <div class="pagination-container" id="pagination-container">
+                <!-- 分页控件将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2023 Prophesyzx's Blog. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-weibo"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/article-manager.js"></script>
+    <script src="js/markdown-editor.js"></script>
+    <script src="js/manage.js"></script>
+</body>
+</html>
