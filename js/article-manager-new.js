@@ -92,9 +92,13 @@ const ArticleManager = {
                 try {
                     await GitHubAPI.addArticle(article);
                     console.log('文章已同步到GitHub');
+                    alert('文章已成功保存到GitHub！');
                 } catch (error) {
                     console.log('无法同步到GitHub，但文章已保存到本地:', error);
+                    alert('文章已保存到本地，但无法同步到GitHub。请检查您的GitHub Token配置。');
                 }
+            } else {
+                alert('文章已保存到本地。要同步到GitHub，请在设置中配置GitHub Token。');
             }
             
             return article;
@@ -124,9 +128,13 @@ const ArticleManager = {
                     try {
                         await GitHubAPI.updateArticle(updatedArticle);
                         console.log('文章已同步到GitHub');
+                        alert('文章已成功保存到GitHub！');
                     } catch (error) {
                         console.log('无法同步到GitHub，但文章已保存到本地:', error);
+                        alert('文章已保存到本地，但无法同步到GitHub。请检查您的GitHub Token配置。');
                     }
+                } else {
+                    alert('文章已保存到本地。要同步到GitHub，请在设置中配置GitHub Token。');
                 }
                 
                 return updatedArticle;
@@ -158,9 +166,13 @@ const ArticleManager = {
                     try {
                         await GitHubAPI.deleteArticle(id);
                         console.log('文章已同步到GitHub');
+                        alert('文章已成功从GitHub删除！');
                     } catch (error) {
                         console.log('无法同步到GitHub，但文章已保存到本地:', error);
+                        alert('文章已从本地删除，但无法从GitHub删除。请检查您的GitHub Token配置。');
                     }
+                } else {
+                    alert('文章已从本地删除。要从GitHub删除，请在设置中配置GitHub Token。');
                 }
                 
                 return true;
@@ -192,9 +204,13 @@ const ArticleManager = {
                     try {
                         await GitHubAPI.togglePinArticle(id);
                         console.log('文章已同步到GitHub');
+                        alert('文章置顶状态已成功保存到GitHub！');
                     } catch (error) {
                         console.log('无法同步到GitHub，但文章已保存到本地:', error);
+                        alert('文章置顶状态已保存到本地，但无法同步到GitHub。请检查您的GitHub Token配置。');
                     }
+                } else {
+                    alert('文章置顶状态已保存到本地。要同步到GitHub，请在设置中配置GitHub Token。');
                 }
                 
                 return article;
