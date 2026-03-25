@@ -115,7 +115,7 @@ const GitHubAPI = {
 
     // 获取所有文章
     async getAllArticles() {
-        // 优先尝试从本地文件读取
+        // 优先尝试从GitHub获取文章数据
         try {
             const response = await fetch(this.config.dataPath);
             if (response.ok) {

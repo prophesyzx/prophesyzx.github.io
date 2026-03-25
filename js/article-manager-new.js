@@ -48,23 +48,28 @@ const ArticleManager = {
 
     // 获取所有文章
     async getAllArticles() {
-        // 优先从localStorage获取文章数据
-        const localArticles = localStorage.getItem('articles');
-        if (localArticles) {
-            try {
-                const articles = JSON.parse(localArticles);
-                console.log('从localStorage加载文章:', articles);
-                return articles;
-            } catch (error) {
-                console.error('解析本地文章数据失败:', error);
-            }
-        }
-        
-        // 如果localStorage中没有数据，尝试从GitHubAPI获取
+        // 优先从GitHub API获取文章数据
         try {
-            return await GitHubAPI.getAllArticles();
+            const articles = await GitHubAPI.getAllArticles();
+            console.log('从GitHub API加载文章:', articles);
+            // 保存到localStorage，以便下次快速加载
+            localStorage.setItem('articles', JSON.stringify(articles));
+            return articles;
         } catch (error) {
-            console.error('从GitHub获取文章失败:', error);
+            console.log('无法从GitHub API获取文章，尝试从localStorage获取:', error);
+            
+            // 如果GitHub API获取失败，尝试从localStorage获取
+            const localArticles = localStorage.getItem('articles');
+            if (localArticles) {
+                try {
+                    const articles = JSON.parse(localArticles);
+                    console.log('从localStorage加载文章:', articles);
+                    return articles;
+                } catch (error) {
+                    console.error('解析本地文章数据失败:', error);
+                }
+            }
+            
             return [];
         }
     },
