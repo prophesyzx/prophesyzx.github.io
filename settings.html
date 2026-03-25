@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>设置 - Prophesyzx's Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .settings-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .settings-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .settings-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .settings-description {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .settings-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .settings-section {
+            margin-bottom: 30px;
+        }
+
+        .settings-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .settings-section-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .settings-item {
+            margin-bottom: 20px;
+        }
+
+        .settings-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .settings-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .settings-input:focus {
+            outline: none;
+            border-color: #4a90e2;
+        }
+
+        .settings-help {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .settings-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #4a90e2;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #3a80d2;
+        }
+
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        .token-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-left: 10px;
+        }
+
+        .token-status.valid {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .token-status.invalid {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 20px;
+            color: #4a90e2;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #3a80d2;
+        }
+
+        .back-link i {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="settings-container">
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> 返回首页
+        </a>
+
+        <div class="settings-header">
+            <h1 class="settings-title">设置</h1>
+            <p class="settings-description">配置您的博客设置，包括GitHub访问令牌等</p>
+        </div>
+
+        <div id="alert" class="alert"></div>
+
+        <div class="settings-card">
+            <div class="settings-section">
+                <h2 class="settings-section-title">GitHub设置</h2>
+
+                <div class="settings-item">
+                    <label class="settings-label" for="github-token">
+                        GitHub访问令牌
+                        <span id="token-status" class="token-status invalid">未设置</span>
+                    </label>
+                    <input type="password" id="github-token" class="settings-input" placeholder="请输入您的GitHub个人访问令牌">
+                    <p class="settings-help">
+                        用于访问GitHub仓库以管理文章数据。您可以在GitHub设置中生成个人访问令牌。
+                        令牌将存储在本地浏览器中，不会发送到任何服务器。
+                    </p>
+                </div>
+
+                <div class="settings-buttons">
+                    <button id="save-token-btn" class="btn btn-primary">保存令牌</button>
+                    <button id="clear-token-btn" class="btn btn-secondary">清除令牌</button>
+                    <button id="test-token-btn" class="btn btn-secondary">测试令牌</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-card">
+            <div class="settings-section">
+                <h2 class="settings-section-title">如何获取GitHub访问令牌</h2>
+                <ol>
+                    <li>登录您的GitHub账户</li>
+                    <li>点击右上角的个人头像，选择"Settings"</li>
+                    <li>在左侧菜单中，向下滚动找到"Developer settings"</li>
+                    <li>点击"Personal access tokens"，然后选择"Tokens (classic)"</li>
+                    <li>点击"Generate new token (classic)"按钮</li>
+                    <li>填写令牌信息并选择适当的权限（至少需要repo权限）</li>
+                    <li>点击"Generate token"按钮生成令牌</li>
+                    <li>复制生成的令牌并粘贴到上方的输入框中</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/github-api.js"></script>
+    <script src="js/settings.js"></script>
+</body>
+</html>
